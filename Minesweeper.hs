@@ -8,3 +8,9 @@ data Cell = Cell Int Bool deriving (Show)
 -- Type for a field
 -- A field is represented a 2d list of cells
 type Field = [[Cell]]
+
+testfield :: Field
+testfield = [[Cell 0 False, Cell 0 False, Cell 0 False, Cell 0 False],
+             [Cell 1 False, Cell 1 False, Cell 2 False, Cell 1 False],
+             [Cell 1 False, Cell 9 False, Cell 3 False, Cell 9 False],
+             [Cell 1 False, Cell 1 False, Cell 3 False, Cell 9 False]]
