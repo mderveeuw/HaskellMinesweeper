@@ -14,3 +14,9 @@ testfield = [[Cell 0 False False, Cell 0 False False, Cell 0 False False, Cell 0
              [Cell 1 False False, Cell 1 False False, Cell 2 False False, Cell 1 False False],
              [Cell 1 False False, Cell 9 False False, Cell 3 False False, Cell 9 False False],
              [Cell 1 False False, Cell 1 False False, Cell 3 False False, Cell 9 False False]]
+
+show :: Int -> Int -> Field -> Field
+show x y field = undefined 
+
+mark :: Int -> Int -> Field -> Field
+mark x y field = undefined
