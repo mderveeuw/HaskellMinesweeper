@@ -5,12 +5,16 @@
 -- Has another Bool which is True if cell is marked as mine 
 data Cell = Cell Int Bool Bool deriving (Show)
 
--- Type for a field
--- A field is represented a 2d list of cells
-type Field = [[Cell]]
+-- Data type for a field
+-- Has an Int equal to field width
+-- Has an Int equal to field height
+-- Has an Int equal to amount of mines in field
+-- TODO: safe constructor?
+data Field = Field Int Int Int [[Cell]] deriving (Show)
 
 testfield :: Field
-testfield = [[Cell 0 False False, Cell 0 False False, Cell 0 False False, Cell 0 False False],
+testfield =  Field 4 4 3 
+            [[Cell 0 False False, Cell 0 False False, Cell 0 False False, Cell 0 False False],
              [Cell 1 False False, Cell 1 False False, Cell 2 False False, Cell 1 False False],
              [Cell 1 False False, Cell 9 False False, Cell 3 False False, Cell 9 False False],
              [Cell 1 False False, Cell 1 False False, Cell 3 False False, Cell 9 False False]]
