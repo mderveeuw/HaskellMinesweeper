@@ -19,6 +19,13 @@ testfield =  Field 4 4 3
              [Cell 1 False False, Cell 9 False False, Cell 3 False False, Cell 9 False False],
              [Cell 1 False False, Cell 1 False False, Cell 3 False False, Cell 9 False False]]
 
+replace :: Int -> a -> [a] -> [a]
+replace n e l = take n l ++ [e] ++ drop (n + 1) l
+
+update :: Int -> Int -> Cell -> Field -> Field
+update x y cell (Field w h m f) = 
+    Field w h m (replace y (replace x cell (f !! y)) f)
+
 show :: Int -> Int -> Field -> Field
 show x y field = undefined 
 
