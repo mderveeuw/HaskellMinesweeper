@@ -1,7 +1,7 @@
 -- Data type for a Tile on a field
 -- Has an Int having values 1 - 8 indicating the count 
 -- of surrounding mines or 9 if Tile contains mine
--- Has a Bool which is True if Tile is shown
+-- Has a Bool which is True if Tile is revealed
 -- Has a Bool which is True if Tile is marked as mine 
 data Tile = Tile Int Bool Bool deriving (Show)
 
@@ -30,8 +30,8 @@ update x y tile (Field w h m f) =
 getTile :: Int -> Int -> Field -> Tile
 getTile x y (Field _ _ _ f) = f !! y !! x
 
-show :: Int -> Int -> Field -> Field
-show x y field@(Field w h m f) = if inBounds x y field && not shown then 
+reveal :: Int -> Int -> Field -> Field
+reveal x y field@(Field w h m f) = if inBounds x y field && not revealed then 
                                      if mineCount == 0 then
                                          fieldWest
                                      else
@@ -40,22 +40,22 @@ show x y field@(Field w h m f) = if inBounds x y field && not shown then
                                      field
                                  where inBounds x y (Field w h _ _) 
                                             = 0 <= x && x < w && 0 <= y && y < h
-                                       Tile mineCount shown marked 
+                                       Tile mineCount revealed marked 
                                             = getTile x y field
                                        field' 
                                             = update x y 
                                               (Tile mineCount True marked) field
                                        fieldNorth 
-                                            = Main.show x (y - 1) field'
+                                            = reveal x (y - 1) field'
                                        fieldEast 
-                                            = Main.show (x + 1) y fieldNorth
+                                            = reveal (x + 1) y fieldNorth
                                        fieldSouth 
-                                            = Main.show x (y + 1) fieldEast
+                                            = reveal x (y + 1) fieldEast
                                        fieldWest 
-                                            = Main.show (x - 1) y fieldSouth
+                                            = reveal (x - 1) y fieldSouth
 
 mark :: Int -> Int -> Field -> Field
 mark x y field@(Field w h m f) = update x y markedTile field
-                    where Tile mineCount shown _ = getTile x y field
-                          markedTile = Tile mineCount shown True
+                    where Tile mineCount revealed _ = getTile x y field
+                          markedTile = Tile mineCount revealed True
                           
