@@ -58,4 +58,6 @@ mark :: Int -> Int -> Field -> Field
 mark x y field@(Field w h m f) = update x y markedTile field
                     where Tile mineCount revealed _ = getTile x y field
                           markedTile = Tile mineCount revealed True
-                          
+
+chord :: Int -> Int -> Field -> Field
+chord = undefined
