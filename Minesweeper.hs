@@ -3,7 +3,10 @@
 -- of surrounding mines or 9 if Tile contains mine
 -- Has a Bool which is True if Tile is revealed
 -- Has a Bool which is True if Tile is marked as mine 
-data Tile = Tile Int Bool Bool deriving (Show)
+data Tile = Tile { count :: Int
+                 , revealed :: Bool
+                 , marked :: Bool
+                 } deriving (Show)
 
 -- Data type for a field
 -- Has an Int equal to field width
@@ -11,7 +14,11 @@ data Tile = Tile Int Bool Bool deriving (Show)
 -- Has an Int equal to amount of mines in field
 -- Has a 2-dimensional list of Tiles representing field
 -- TODO: safe constructor?
-data Field = Field Int Int Int [[Tile]] deriving (Show)
+data Field = Field { width :: Int
+                   , height :: Int
+                   , mines :: Int
+                   , field :: [[Tile]]
+                   } deriving (Show)
 
 testfield :: Field
 testfield =  Field 4 4 3 
