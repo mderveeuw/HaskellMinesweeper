@@ -62,9 +62,9 @@ reveal x y field@(Field w h m f) = if inBounds x y field && not revealed then
                                             = reveal (x - 1) y fieldSouth
 
 mark :: Int -> Int -> Field -> Field
-mark x y field@(Field w h m f) = update x y markedTile field
-                    where Tile mineCount revealed _ = getTile x y field
-                          markedTile = Tile mineCount revealed True
+mark x y field = update x y markedTile field
+                    where tile = getTile x y field
+                          markedTile = Tile (count tile) (revealed tile) True
 
 chord :: Int -> Int -> Field -> Field
 chord = undefined
