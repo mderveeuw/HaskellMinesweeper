@@ -34,6 +34,9 @@ update :: Int -> Int -> Tile -> Field -> Field
 update x y tile (Field w h m f) = 
     Field w h m (replace y (replace x tile (f !! y)) f)
 
+inBounds :: Int -> Int -> Field -> Bool
+inBounds x y (Field w h _ _) = 0 <= x && x < w && 0 <= y && y < h
+
 getTile :: Int -> Int -> Field -> Tile
 getTile x y (Field _ _ _ f) = f !! y !! x
 
@@ -45,9 +48,7 @@ reveal x y field@(Field w h m f) = if inBounds x y field && not revealed then
                                          field'
                                  else
                                      field
-                                 where inBounds x y (Field w h _ _) 
-                                            = 0 <= x && x < w && 0 <= y && y < h
-                                       tile@(Tile mineCount revealed marked) 
+                                 where tile@(Tile mineCount revealed marked) 
                                             = getTile x y field
                                        revealedTile = if revealed || marked then
                                                           tile
