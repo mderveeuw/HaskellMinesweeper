@@ -43,7 +43,7 @@ getTile :: Coord -> Field -> Tile
 getTile (x, y) (Field _ _ _ f) = f !! y !! x
 
 reveal :: Coord -> Field -> Field
-reveal (x, y) field@(Field w h m f) = if inBounds (x, y) field 
+reveal (x, y) field = if inBounds (x, y) field 
                                                 && not revealed then 
                                           if mineCount == 0 then
                                               fieldWest
