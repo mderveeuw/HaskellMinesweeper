@@ -73,4 +73,20 @@ mark (x, y) field = update (x, y) markedTile field
                           markedTile = Tile (count tile) (revealed tile) True
 
 chord :: Coord -> Field -> Field
-chord (x, y) field = undefined
+chord (x, y) field = if foldl (flip ((+) . fromEnum)) 0 (map marked neighbours) 
+                          == count tile then
+                         field''''''''
+                     else
+                         field
+                where tile = getTile (x, y) field
+                      coords = filter (\c -> inBounds c field) 
+                                [(x + i, y + j) | i <- [-1..1], j <- [-1..1]]
+                      neighbours = map (\c -> getTile c field) coords
+                      field' = reveal (x + 1, y) field
+                      field'' = reveal (x - 1, y) field'
+                      field''' = reveal (x + 1, y + 1) field''
+                      field'''' = reveal (x - 1, y + 1) field'''
+                      field''''' = reveal (x, y + 1) field''''
+                      field'''''' = reveal (x + 1, y - 1) field'''''
+                      field''''''' = reveal (x - 1, y - 1) field''''''
+                      field'''''''' = reveal (x, y - 1) field''''''' 
